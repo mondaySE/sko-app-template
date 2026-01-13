@@ -51,28 +51,59 @@ All changes discarded. Working directory restored to last commit.
 
 ---
 
-### 3. `rollback`
+### 3. `checkpoints`
 **Description:**  
-Reverts the repository to the previous commit. This is helpful if a recent commit introduced unwanted changes.
+Displays a list of all commits as checkpoints. This is useful to view your progress and see what changes have been saved.
 
 **Action:**  
-- Moves the current branch pointer to the previous commit
-- Preserves the working directory according to the previous commit state
+- Shows all commits with their checkpoint names (commit messages) and dates
 
 **Git Equivalent:**
 ```bash
-git reset --hard HEAD~1
+git log --oneline
 ```
 
 **Usage Example:**
 ```
+> checkpoints
+Checkpoints:
+1. a1b2c3d - Add new component (2 hours ago)
+2. e4f5g6h - Initial setup (yesterday)
+```
+
+---
+
+### 4. `rollback [commit-hash]`
+**Description:**  
+Reverts the repository to a specific commit or the previous commit. This is helpful if a recent commit introduced unwanted changes.
+
+**Action:**  
+- If a commit hash is provided, resets to that specific commit
+- If no commit hash is provided, resets to the previous commit (HEAD~1)
+- All commits after the target commit will be removed
+
+**Git Equivalent:**
+```bash
+# With commit hash:
+git reset --hard <commit-hash>
+
+# Without commit hash (previous commit):
+git reset --hard HEAD~1
+```
+
+**Usage Examples:**
+```
 > rollback
 Rolled back to previous commit.
+
+> rollback a1b2c3d
+Rolled back to checkpoint "Add new component" (a1b2c3d).
 ```
 
 ---
 
 ## Notes
+- **Never commit without the user explicitly asking.** Always wait for user confirmation before running any git commit.
 - These commands are **local only** and will not push changes to any remote repository.  
 - Use `reset` carefully: all uncommitted changes will be permanently lost.  
 - Use `rollback` carefully: it removes the most recent commit, along with its changes.  
