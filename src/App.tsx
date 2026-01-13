@@ -1,13 +1,20 @@
 import { useState } from 'react'
+import { Toaster } from 'sonner'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { FloatingSettingsButton } from './components/FloatingSettingsButton'
+import { useBoardsLoader } from './hooks/useBoardsLoader'
 
 function App() {
   const [count, setCount] = useState(0)
+  
+  // Load boards on app start
+  useBoardsLoader()
 
   return (
     <>
+      <Toaster position="top-right" />
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -28,6 +35,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <FloatingSettingsButton />
     </>
   )
 }

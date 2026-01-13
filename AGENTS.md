@@ -4,6 +4,71 @@ This file defines custom agent commands for managing your Git workflow during th
 
 ---
 
+## Project Overview
+
+This is a **React** application and a **monday.com app** built on top of monday's app framework.
+
+### Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **React 19** | UI framework (with TypeScript) |
+| **Vite** | Build tool and dev server |
+| **Tailwind CSS v4** | Utility-first CSS framework |
+| **shadcn/ui** | Pre-built UI components |
+| **Zustand** | State management (with localStorage persistence) |
+| **Lucide React** | Icon library |
+| **monday-sdk-js** | monday.com API integration |
+| **Sonner** | Toast notifications |
+
+### UI Guidelines
+
+- **All UI components** should be from **shadcn/ui**
+- Add new components with: `npx shadcn@latest add <component>`
+- Use Tailwind CSS for custom styling
+- Follow the existing component patterns
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── ui/                    # shadcn/ui components (auto-generated)
+│   │   ├── button.tsx
+│   │   ├── dialog.tsx
+│   │   ├── input.tsx
+│   │   └── label.tsx
+│   ├── FloatingSettingsButton.tsx  # Settings FAB button
+│   └── SettingsModal.tsx           # Settings configuration modal
+├── hooks/
+│   └── useBoardsLoader.ts     # Hook to fetch monday.com boards on app load
+├── stores/
+│   ├── system-store.ts        # Zustand store with localStorage persistence
+│   └── boards-store.ts        # Zustand store for monday.com boards data
+├── lib/
+│   └── utils.ts               # Utility functions (cn for classnames)
+├── assets/                    # Static assets
+├── App.tsx                    # Main application component
+├── App.css                    # App-specific styles
+├── index.css                  # Global styles & Tailwind theme
+└── main.tsx                   # Application entry point
+
+settings-config.json           # Configuration schema for settings modal
+components.json                # shadcn/ui configuration
+```
+
+### Key Files
+
+- **`settings-config.json`**: Defines the fields shown in the settings modal. Add new configuration fields here.
+- **`src/stores/system-store.ts`**: Zustand store with `persist` middleware. Config is auto-saved to localStorage.
+- **`src/stores/boards-store.ts`**: Zustand store for fetched monday.com boards data.
+- **`src/hooks/useBoardsLoader.ts`**: Hook that fetches boards on app load using monday-sdk-js.
+- **`src/index.css`**: Contains Tailwind CSS theme variables (colors, radius, etc.)
+
+---
+
 ## Commands
 
 ### 1. `save`
@@ -35,12 +100,14 @@ All changes staged and committed as "Add new component".
 Discards all uncommitted changes and restores the working directory to the last committed state. This is useful if you want to start over from your last saved checkpoint.
 
 **Action:**  
-- Resets all files to match the latest commit
+- Resets all tracked files to match the latest commit
+- Removes all untracked files and directories
 - Discards all local modifications
 
 **Git Equivalent:**
 ```bash
 git reset --hard
+git clean -fd
 ```
 
 **Usage Example:**
