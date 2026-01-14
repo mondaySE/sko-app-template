@@ -16,6 +16,7 @@ This is a **React** application and a **monday.com app** built on top of monday'
 | **Vite** | Build tool and dev server |
 | **Tailwind CSS v4** | Utility-first CSS framework |
 | **shadcn/ui** | Pre-built UI components |
+| **React Router** | Client-side routing (HashRouter for iframe compatibility) |
 | **Zustand** | State management (with localStorage persistence) |
 | **Lucide React** | Icon library |
 | **monday-sdk-js** | monday.com API integration |
@@ -27,6 +28,15 @@ This is a **React** application and a **monday.com app** built on top of monday'
 - Add new components with: `npx shadcn@latest add <component>`
 - Use Tailwind CSS for custom styling
 - Follow the existing component patterns
+
+### Routing
+
+- Uses **React Router** with `HashRouter` (recommended for monday.com iframe embedding)
+- Router is configured in `src/main.tsx`
+- Define routes in `src/App.tsx` using `<Routes>` and `<Route>` components
+- Use `useNavigate()` hook for programmatic navigation
+- Use `<Link>` component for navigation links
+- **When adding new views/pages**: Always create a new route in `src/App.tsx` and integrate it with the router
 
 ---
 
