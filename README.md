@@ -1,73 +1,101 @@
-# React + TypeScript + Vite
+# monday.com App Workshop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome! This guide will help you set up everything you need for the workshop. Don't worry if you're not a developer — just follow these steps one by one.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prerequisites
 
-## React Compiler
+Before starting, you'll need to install three tools on your computer: **Node.js**, **Git**, and **Cursor IDE**.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Install Node.js
 
-## Expanding the ESLint configuration
+Node.js is a tool that allows you to run JavaScript applications on your computer.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Go to the official Node.js website: **https://nodejs.org**
+2. Download the **LTS** version (the one on the left with the green button)
+3. Open the downloaded file and follow the installation wizard
+4. Click "Next" through all the steps and finish the installation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**To verify it's installed correctly:**
+- Open your terminal (on Mac: search for "Terminal" in Spotlight, on Windows: search for "Command Prompt" or "PowerShell")
+- Type `node --version` and press Enter
+- You should see a version number like `v20.x.x` or similar
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Install Git
+
+Git is a tool that helps track changes to your code and collaborate with others.
+
+1. Go to the official Git website: **https://git-scm.com/downloads**
+2. Choose your operating system (Windows, Mac, or Linux)
+3. Download and run the installer
+4. Follow the installation wizard with the default options (just keep clicking "Next")
+
+**To verify it's installed correctly:**
+- Open your terminal
+- Type `git --version` and press Enter
+- You should see a version number like `git version 2.x.x`
+
+---
+
+### 3. Install Cursor IDE
+
+Cursor is a code editor that we'll use during the workshop.
+
+1. Go to: **https://cursor.com**
+2. Click "Download" and install it
+3. Open Cursor after installation
+
+---
+
+## Getting Started
+
+Once you have all prerequisites installed, follow these steps:
+
+### 1. Clone the repository
+
+1. Open Cursor IDE
+2. Press `Cmd + Shift + P` (Mac) or `Ctrl + Shift + P` (Windows)
+3. Type "Git: Clone" and press Enter
+4. Paste this URL: `https://github.com/mondaySE/sko-app-template.git`
+5. Choose where to save the project (e.g., your Documents folder)
+6. Click "Open" when prompted
+
+### 2. Install dependencies
+
+1. Open the terminal in Cursor: go to **Terminal > New Terminal** (or press `` Ctrl + ` ``)
+2. Run this command:
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Start the development server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+You should see a message with a local URL (usually `http://localhost:5175`). Open this URL in your browser to see the app!
+
+### 4. Set up monday.com workspace
+
+1. Go to your monday.com account: **https://mdc-demo.monday.com/**
+2. Install the workspace template from: **https://mdc-demo.monday.com/marketplace/v2/app/listing/10784068/sko-booker**
+3. Follow the prompts to install the template in your workspace
+
+![monday.com workspace setup](docs/workspace-setup.png)
+
+---
+
+## Need Help?
+
+If you run into any issues:
+1. Make sure you've installed both Node.js and Git
+2. Try closing and reopening your terminal
+3. Ask your instructor for assistance
+
+---
+
+Happy coding! 🚀
