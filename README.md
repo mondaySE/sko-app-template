@@ -84,9 +84,15 @@ You should see a message with a local URL (usually `http://localhost:5175`). Ope
 1. Go to your monday.com account: **https://mdc-demo.monday.com/**
 2. Install the workspace template from: **https://mdc-demo.monday.com/marketplace/v2/app/listing/10784068/sko-booker**
 3. Follow the prompts to install the template in your workspace
+4. Take your time to explore the boards in the workspace and understand how they work
+5. Open the SKOBooker app in your workspace, it should look like this
 
 ![monday.com workspace setup](docs/workspace-setup.png)
 
+5. Configure the board ids of each board respectively
+
+![monday.com settings setup](docs/settings.png)
+6. Congratulations! You're ready to start vibe coding!
 ---
 
 ## Need Help?
