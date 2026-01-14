@@ -90,7 +90,7 @@ You should see a message with a local URL (usually `http://localhost:5175`). Ope
 6. Configure the board ids of each board respectively
 ![monday.com settings setup](docs/settings.png)
 7. Click "Save", page should reload and fetch the boards. After loading is done you should see this screen:
-![monday.com settings setup](docs/ready.png)
+![monday.com ready screen](docs/ready.png)
 8. Congratulations! You're ready to start vibe coding!
 
 ---
@@ -111,6 +111,31 @@ During the workshop, you can use these simple commands by typing them in the Cur
 - Use `save` frequently to create checkpoints before trying something new
 - Use `reset` if you want to start over from your last save
 - Use `rollback` if your last save introduced a mistake
+
+---
+
+## Troubleshooting
+
+### App won't render?
+
+If your app isn't loading or showing a blank screen, you can check for errors using Chrome's Developer Tools:
+
+**Opening Developer Tools:**
+1. Open Google Chrome and navigate to your monday app
+2. Right-click anywhere on the page and select **"Inspect"**
+   - Or use the keyboard shortcut: `Cmd + Option + I` (Mac) or `Ctrl + Shift + I` (Windows)
+3. Click on the **"Console"** tab at the top of the Developer Tools panel
+
+**Copying errors from the Console:**
+1. Look for any red error messages in the Console
+2. Click on an error message to expand it (if needed)
+3. Right-click on the error message and select **"Copy" > "Copy message"**
+   - Or select the error text and press `Cmd + C` (Mac) or `Ctrl + C` (Windows)
+4. Paste the copied error into the AI chat for help
+
+![monday.com ready screen](docs/error.png)
+
+**Pro tip:** If there are multiple errors, you can right-click in the Console and select **"Save as..."** to download the entire console log as a text file.
 
 ---
 
