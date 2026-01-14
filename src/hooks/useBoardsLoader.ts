@@ -22,10 +22,7 @@ const boardKeyMap: Record<string, keyof BoardsData> = {
   customersBoardId: 'customers',
 };
 
-async function fetchBoard(boardId: string, apiKey: string): Promise<Board> {
-  monday.setApiVersion('2024-10');
-  monday.setToken(apiKey);
-
+async function fetchBoard(boardId: string): Promise<Board> {
   const query = `
     query GetBoard($boardId: [ID!]!) {
       boards(ids: $boardId) {
@@ -77,19 +74,17 @@ export function useBoardsLoader() {
     );
 
     // Create a config fingerprint to detect changes
-    const configFingerprint = JSON.stringify({
-      apiKey: config.apiKey,
-      ...Object.fromEntries(boardSettings.map(s => [s.name, config[s.name]]))
-    });
+    const configFingerprint = JSON.stringify(
+      Object.fromEntries(boardSettings.map(s => [s.name, config[s.name]]))
+    );
 
     // Skip if config hasn't changed
     if (configFingerprint === prevConfigRef.current) return;
 
-    // Check if we have API key and at least one board ID
-    const hasApiKey = Boolean(config.apiKey);
+    // Check if we have at least one board ID
     const hasAnyBoardId = boardSettings.some((setting) => config[setting.name]);
     
-    if (!hasApiKey || !hasAnyBoardId) return;
+    if (!hasAnyBoardId) return;
 
     prevConfigRef.current = configFingerprint;
 
@@ -109,7 +104,7 @@ export function useBoardsLoader() {
         }
 
         try {
-          const board = await fetchBoard(boardId, config.apiKey);
+          const board = await fetchBoard(boardId);
           setBoard(boardKey, board);
           toast.success(`${description} board successfully fetched`, {
             style: { background: '#22c55e', color: 'white', border: 'none' },

@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export interface SystemConfig {
-  apiKey: string;
   restaurantsBoardId: string;
   ordersBoardId: string;
   tablesBoardId: string;
@@ -17,7 +16,6 @@ interface SystemStore {
 }
 
 const defaultConfig: SystemConfig = {
-  apiKey: '',
   restaurantsBoardId: '',
   ordersBoardId: '',
   tablesBoardId: '',

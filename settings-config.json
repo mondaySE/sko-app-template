@@ -1,6 +1,5 @@
 {
     "settings": [
-        {"type": "text", "label": "API Key", "name": "apiKey", "section": "API"},
         {"type": "text", "label": "Restaurants board ID", "name": "restaurantsBoardId", "section": "Boards", "description": "Restaurants board"},
         {"type": "text", "label": "Orders board ID", "name": "ordersBoardId", "section": "Boards", "description": "Orders board"},
         {"type": "text", "label": "Tables board ID", "name": "tablesBoardId", "section": "Boards", "description": "Tables board"},
