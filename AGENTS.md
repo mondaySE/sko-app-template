@@ -36,7 +36,21 @@ This is a **React** application and a **monday.com app** built on top of monday'
 - Define routes in `src/App.tsx` using `<Routes>` and `<Route>` components
 - Use `useNavigate()` hook for programmatic navigation
 - Use `<Link>` component for navigation links
-- **When adding new views/pages**: Always create a new route in `src/App.tsx` and integrate it with the router
+- **When adding new views/pages**: Create the page component in `src/pages/` and add the route in `src/App.tsx`
+
+### Code Quality Guidelines
+
+Act like a **senior engineer** and follow these principles:
+
+- **One component per file**: Each React component should live in its own dedicated file in `src/components/`
+- **Separation of concerns**: Keep UI, logic, and data fetching separate (components, hooks, stores)
+- **Clean code**: Write readable, self-documenting code with meaningful names
+- **SOLID principles**: 
+  - Single Responsibility: Each module/component should do one thing well
+  - Open/Closed: Extend behavior through props/composition, not modification
+  - Dependency Inversion: Depend on abstractions (hooks, stores) not concrete implementations
+- **DRY (Don't Repeat Yourself)**: Extract reusable logic into hooks or utility functions
+- **Keep files small**: If a file grows too large, refactor and extract components/hooks
 
 ---
 
@@ -51,7 +65,12 @@ src/
 │   │   ├── input.tsx
 │   │   └── label.tsx
 │   ├── FloatingSettingsButton.tsx  # Settings FAB button
-│   └── SettingsModal.tsx           # Settings configuration modal
+│   ├── SettingsModal.tsx           # Settings configuration modal
+│   ├── LoadingScreen.tsx           # Loading state component
+│   ├── ErrorScreen.tsx             # Error state component
+│   └── MondayLogo.tsx              # monday.com logo SVG
+├── pages/
+│   └── HomePage.tsx           # Home page (all route pages go here)
 ├── hooks/
 │   └── useBoardsLoader.ts     # Hook to fetch monday.com boards on app load
 ├── stores/
@@ -60,7 +79,7 @@ src/
 ├── lib/
 │   └── utils.ts               # Utility functions (cn for classnames)
 ├── assets/                    # Static assets
-├── App.tsx                    # Main application component
+├── App.tsx                    # Main application component (routing & layout)
 ├── App.css                    # App-specific styles
 ├── index.css                  # Global styles & Tailwind theme
 └── main.tsx                   # Application entry point
