@@ -41,6 +41,12 @@ async function fetchBoard(boardId: string): Promise<Board> {
               id
               text
               value
+              ... on BoardRelationValue {
+                linked_items {
+                  id
+                  name
+                }
+              }
             }
           }
         }
@@ -117,6 +123,11 @@ export function useBoardsLoader() {
       }
 
       setLoading(false);
+      
+      // Log the entire store after fetching is complete
+      const storeState = useBoardsStore.getState();
+      console.log('=== Boards Store ===');
+      console.log(storeState);
     }
 
     loadBoards();
