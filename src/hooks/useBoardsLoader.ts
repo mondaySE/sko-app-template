@@ -47,6 +47,15 @@ async function fetchBoard(boardId: string): Promise<Board> {
                   name
                 }
               }
+              ... on MirrorValue {
+                display_value
+                mirrored_items {
+                  linked_item {
+                    id
+                    name
+                  }
+                }
+              }
             }
           }
         }
@@ -124,10 +133,13 @@ export function useBoardsLoader() {
 
       setLoading(false);
       
-      // Log the entire store after fetching is complete
-      const storeState = useBoardsStore.getState();
-      console.log('=== Boards Store ===');
-      console.log(storeState);
+      // Log typed data after fetching is complete
+      const store = useBoardsStore.getState();
+      console.log('=== Typed Board Data ===');
+      console.log('Restaurants:', store.getRestaurants());
+      console.log('Reservations:', store.getReservations());
+      console.log('Tables:', store.getTables());
+      console.log('Customers:', store.getCustomers());
     }
 
     loadBoards();

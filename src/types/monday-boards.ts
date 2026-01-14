@@ -34,7 +34,7 @@ export const RESERVATION_COLUMNS = {
 
 export const TABLE_COLUMNS = {
   NAME: 'name',
-  RESTAURANTS: 'board_relation_mkzkaa4c',
+  RESTAURANT: 'board_relation_mkzkaa4c',
   CAPACITY: 'numeric_mkzkz4qf',
   TYPE: 'color_mkzkxz4b',              // status column
 } as const;
@@ -78,7 +78,7 @@ export interface Reservation {
 export interface Table {
   id: string;
   name: string;
-  restaurants: LinkedItem[];
+  restaurant: LinkedItem | null;
   capacity: number;
   type: string;            // status: Indoor, Outdoor, etc.
 }
@@ -94,11 +94,18 @@ export interface Customer {
 // RAW ITEM TYPE (from monday.com API)
 // ============================================================================
 
+export interface MirroredItem {
+  linked_item: LinkedItem;
+}
+
 export interface RawColumnValue {
   id: string;
   text: string;
   value: string | null;
   linked_items?: LinkedItem[];
+  // Mirror column fields
+  display_value?: string;
+  mirrored_items?: MirroredItem[];
 }
 
 export interface RawBoardItem {
@@ -150,6 +157,30 @@ function getAllLinkedItems(item: RawBoardItem, columnId: string): LinkedItem[] {
   return column?.linked_items ?? [];
 }
 
+/**
+ * Get display value from a mirror column
+ */
+function getMirrorDisplayValue(item: RawBoardItem, columnId: string): string {
+  const column = getColumnValue(item, columnId);
+  return column?.display_value ?? '';
+}
+
+/**
+ * Get first mirrored item from a mirror column
+ */
+export function getMirroredItem(item: RawBoardItem, columnId: string): LinkedItem | null {
+  const column = getColumnValue(item, columnId);
+  return column?.mirrored_items?.[0]?.linked_item ?? null;
+}
+
+/**
+ * Get all mirrored items from a mirror column
+ */
+export function getAllMirroredItems(item: RawBoardItem, columnId: string): LinkedItem[] {
+  const column = getColumnValue(item, columnId);
+  return column?.mirrored_items?.map(m => m.linked_item) ?? [];
+}
+
 // ============================================================================
 // PARSE FUNCTIONS
 // ============================================================================
@@ -171,8 +202,8 @@ export function parseReservation(item: RawBoardItem): Reservation {
     name: item.name,
     customer: getLinkedItem(item, RESERVATION_COLUMNS.CUSTOMER),
     table: getLinkedItem(item, RESERVATION_COLUMNS.TABLE),
-    tableType: getTextValue(item, RESERVATION_COLUMNS.TABLE_TYPE),
-    restaurant: getTextValue(item, RESERVATION_COLUMNS.RESTAURANT),
+    tableType: getMirrorDisplayValue(item, RESERVATION_COLUMNS.TABLE_TYPE),
+    restaurant: getMirrorDisplayValue(item, RESERVATION_COLUMNS.RESTAURANT),
     resStart: getTextValue(item, RESERVATION_COLUMNS.RES_START),
     resEnd: getTextValue(item, RESERVATION_COLUMNS.RES_END),
     people: getNumberValue(item, RESERVATION_COLUMNS.PEOPLE),
@@ -183,7 +214,7 @@ export function parseTable(item: RawBoardItem): Table {
   return {
     id: item.id,
     name: item.name,
-    restaurants: getAllLinkedItems(item, TABLE_COLUMNS.RESTAURANTS),
+    restaurant: getLinkedItem(item, TABLE_COLUMNS.RESTAURANT),
     capacity: getNumberValue(item, TABLE_COLUMNS.CAPACITY),
     type: getTextValue(item, TABLE_COLUMNS.TYPE),
   };
