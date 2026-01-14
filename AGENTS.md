@@ -17,6 +17,7 @@ This is a **React** application and a **monday.com app** built on top of monday'
 | **Tailwind CSS v4** | Utility-first CSS framework |
 | **shadcn/ui** | Pre-built UI components |
 | **React Router** | Client-side routing (HashRouter for iframe compatibility) |
+| **Framer Motion** | Animations and transitions |
 | **Zustand** | State management (with localStorage persistence) |
 | **Lucide React** | Icon library |
 | **monday-sdk-js** | monday.com API integration |
@@ -28,6 +29,14 @@ This is a **React** application and a **monday.com app** built on top of monday'
 - Add new components with: `npx shadcn@latest add <component>`
 - Use Tailwind CSS for custom styling
 - Follow the existing component patterns
+
+### Animations
+
+- Use **Framer Motion** for all animations and transitions
+- Import with: `import { motion } from 'framer-motion'`
+- Wrap elements with `<motion.div>` (or other motion elements) to animate them
+- Use `initial`, `animate`, and `transition` props for entrance animations
+- Use `whileHover` and `whileTap` for interactive animations
 
 ### Routing
 
