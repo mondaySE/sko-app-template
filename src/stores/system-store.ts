@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 export interface SystemConfig {
   restaurantsBoardId: string;
-  ordersBoardId: string;
+  reservationsBoardId: string;
   tablesBoardId: string;
   customersBoardId: string;
   [key: string]: string;
@@ -17,7 +17,7 @@ interface SystemStore {
 
 const defaultConfig: SystemConfig = {
   restaurantsBoardId: '',
-  ordersBoardId: '',
+  reservationsBoardId: '',
   tablesBoardId: '',
   customersBoardId: '',
 };

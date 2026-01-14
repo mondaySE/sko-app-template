@@ -17,7 +17,7 @@ interface BoardSetting {
 
 const boardKeyMap: Record<string, keyof BoardsData> = {
   restaurantsBoardId: 'restaurants',
-  ordersBoardId: 'orders',
+  reservationsBoardId: 'reservations',
   tablesBoardId: 'tables',
   customersBoardId: 'customers',
 };

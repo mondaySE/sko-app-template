@@ -1,7 +1,7 @@
 {
     "settings": [
         {"type": "text", "label": "Restaurants board ID", "name": "restaurantsBoardId", "section": "Boards", "description": "Restaurants board"},
-        {"type": "text", "label": "Orders board ID", "name": "ordersBoardId", "section": "Boards", "description": "Orders board"},
+        {"type": "text", "label": "Reservations board ID", "name": "reservationsBoardId", "section": "Boards", "description": "Reservations board"},
         {"type": "text", "label": "Tables board ID", "name": "tablesBoardId", "section": "Boards", "description": "Tables board"},
         {"type": "text", "label": "Customers board ID", "name": "customersBoardId", "section": "Boards", "description": "Customers board"}
     ]

@@ -25,7 +25,7 @@ export interface Board {
 
 export interface BoardsData {
   restaurants: Board | null;
-  orders: Board | null;
+  reservations: Board | null;
   tables: Board | null;
   customers: Board | null;
 }
@@ -42,7 +42,7 @@ interface BoardsStore {
 
 const defaultBoards: BoardsData = {
   restaurants: null,
-  orders: null,
+  reservations: null,
   tables: null,
   customers: null,
 };
