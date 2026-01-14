@@ -95,6 +95,25 @@ You should see a message with a local URL (usually `http://localhost:5175`). Ope
 
 ---
 
+## Cheat Sheet: Useful Commands
+
+During the workshop, you can use these simple commands by typing them in the Cursor AI chat:
+
+| Command | What it does |
+|---------|--------------|
+| `save` | Saves your current work as a checkpoint. You'll be asked to give it a name. |
+| `reset` | Discards all your changes and goes back to your last saved checkpoint. |
+| `checkpoints` | Shows a list of all your saved checkpoints. |
+| `rollback` | Goes back to the previous checkpoint. |
+| `rollback <id>` | Goes back to a specific checkpoint (use the ID from `checkpoints`). |
+
+**Tips:**
+- Use `save` frequently to create checkpoints before trying something new
+- Use `reset` if you want to start over from your last save
+- Use `rollback` if your last save introduced a mistake
+
+---
+
 ## Need Help?
 
 If you run into any issues:
