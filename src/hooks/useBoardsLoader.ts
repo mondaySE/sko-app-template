@@ -65,7 +65,7 @@ async function fetchBoard(boardId: string): Promise<Board> {
 
 export function useBoardsLoader() {
   const { config } = useSystemStore();
-  const { setBoard, setLoading } = useBoardsStore();
+  const { setBoard, setLoading, setError } = useBoardsStore();
   const prevConfigRef = useRef<string>('');
 
   useEffect(() => {
@@ -90,6 +90,8 @@ export function useBoardsLoader() {
 
     async function loadBoards() {
       setLoading(true);
+      setError(null);
+      const failedBoards: string[] = [];
 
       for (const setting of boardSettings) {
         const boardId = config[setting.name];
@@ -97,30 +99,26 @@ export function useBoardsLoader() {
         const description = setting.description || setting.label;
 
         if (!boardId) {
-          toast.warning(`${setting.label} not set`, {
-            style: { background: '#f97316', color: 'white', border: 'none' },
-          });
           continue;
         }
 
         try {
           const board = await fetchBoard(boardId);
           setBoard(boardKey, board);
-          toast.success(`${description} board successfully fetched`, {
-            style: { background: '#22c55e', color: 'white', border: 'none' },
-          });
         } catch (error) {
           console.error(`Failed to fetch ${description}:`, error);
           setBoard(boardKey, null);
-          toast.error(`${description} board failed to fetch`, {
-            style: { background: '#ef4444', color: 'white', border: 'none' },
-          });
+          failedBoards.push(description);
         }
+      }
+
+      if (failedBoards.length > 0) {
+        setError(`Failed to load: ${failedBoards.join(', ')}`);
       }
 
       setLoading(false);
     }
 
     loadBoards();
-  }, [config, setBoard, setLoading]);
+  }, [config, setBoard, setLoading, setError]);
 }

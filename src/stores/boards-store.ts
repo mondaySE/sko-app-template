@@ -33,8 +33,10 @@ export interface BoardsData {
 interface BoardsStore {
   boards: BoardsData;
   loading: boolean;
+  error: string | null;
   setBoard: (key: keyof BoardsData, board: Board | null) => void;
   setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
   resetBoards: () => void;
 }
 
@@ -48,10 +50,12 @@ const defaultBoards: BoardsData = {
 export const useBoardsStore = create<BoardsStore>((set) => ({
   boards: defaultBoards,
   loading: false,
+  error: null,
   setBoard: (key, board) =>
     set((state) => ({
       boards: { ...state.boards, [key]: board },
     })),
   setLoading: (loading) => set({ loading }),
-  resetBoards: () => set({ boards: defaultBoards }),
+  setError: (error) => set({ error }),
+  resetBoards: () => set({ boards: defaultBoards, error: null }),
 }));
