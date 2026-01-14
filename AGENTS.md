@@ -27,6 +27,10 @@ This is a **React** application and a **monday.com app** built on top of monday'
 
 - **All UI components** should be from **shadcn/ui**
 - Add new components with: `npx shadcn@latest add <component>`
+- **TLS Certificate Issues**: If installation fails due to self-signed certificate errors, use:
+  ```bash
+  NODE_TLS_REJECT_UNAUTHORIZED=0 npx shadcn@latest add <component>
+  ```
 - Use Tailwind CSS for custom styling
 - Follow the existing component patterns
 
