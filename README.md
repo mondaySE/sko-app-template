@@ -6,7 +6,7 @@ Welcome! This guide will help you set up everything you need for the workshop. D
 
 ## Prerequisites
 
-Before starting, you'll need to install three tools on your computer: **Node.js**, **Git**, and **Cursor IDE**.
+Before starting, you'll need to install three tools on your computer: **Node.js**, **Git**, and **Gemini CLI**.
 
 ### 1. Install Node.js
 
@@ -40,14 +40,18 @@ Git is a tool that helps track changes to your code and collaborate with others.
 
 ---
 
-### 3. Install Cursor IDE
+### 3. Install Gemini CLI
 
-Cursor is a code editor that we'll use during the workshop.
+Gemini CLI is an AI-powered terminal tool that we'll use during the workshop to build, debug, and deploy code.
 
-1. Go to: **https://cursor.com**
-2. Click "Download" and install it
-3. Open Cursor after installation
-
+1. Go to: **https://geminicli.com/**
+2. Open your terminal and run:
+```bash
+npm install -g @google/gemini-cli
+```
+3. After installation, run `gemini` in your terminal to start the setup
+4. Follow the prompts to authenticate with your Google account
+5. Congratulations! You are all set with gemini!
 ---
 
 ## Getting Started
@@ -56,17 +60,34 @@ Once you have all prerequisites installed, follow these steps:
 
 ### 1. Clone the repository
 
-1. Open Cursor IDE
-2. Press `Cmd + Shift + P` (Mac) or `Ctrl + Shift + P` (Windows)
-3. Type "Git: Clone" and press Enter
-4. Paste this URL: `https://github.com/mondaySE/sko-app-template.git`
-5. Choose where to save the project (e.g., your Documents folder)
-6. Click "Open" when prompted
+1. Open your terminal
+2. Navigate to where you want to save the project (e.g., `cd ~/Documents`)
+3. Run the following command:
+```bash
+git clone https://github.com/mondaySE/sko-app-template.git
+```
+4. Enter the project folder:
+```bash
+cd sko-app-template
+```
+5. Start Gemini CLI:
+```bash
+gemini
+```
+
+**Changing the model to Gemini 2.5 Pro:**
+
+To use the more powerful Gemini 2.5 Pro model:
+1. Run Gemini CLI by typing `gemini` in your terminal
+2. Type `/model` to see available models
+3. Select `gemini-2.5-pro` from the list
+    - Or run `gemini --model gemini-2.5-pro` when starting the CLI
+
+From this point on, you can ask Gemini CLI to help you with the remaining steps!
 
 ### 2. Install dependencies
 
-1. Open the terminal in Cursor: go to **Terminal > New Terminal** (or press `` Ctrl + ` ``)
-2. Run this command:
+In the project folder, run:
 ```bash
 npm install
 ```
@@ -97,7 +118,7 @@ You should see a message with a local URL (usually `http://localhost:5175`). Ope
 
 ## Cheat Sheet: Useful Commands
 
-During the workshop, you can use these simple commands by typing them in the Cursor AI chat:
+During the workshop, you can use these simple commands by typing them in Gemini CLI:
 
 | Command | What it does |
 |---------|--------------|
@@ -131,7 +152,7 @@ If your app isn't loading or showing a blank screen, you can check for errors us
 2. Click on an error message to expand it (if needed)
 3. Right-click on the error message and select **"Copy" > "Copy message"**
    - Or select the error text and press `Cmd + C` (Mac) or `Ctrl + C` (Windows)
-4. Paste the copied error into the AI chat for help
+4. Paste the copied error into Gemini CLI for help
 
 ![monday.com ready screen](docs/error.png)
 
@@ -142,7 +163,7 @@ If your app isn't loading or showing a blank screen, you can check for errors us
 ## Need Help?
 
 If you run into any issues:
-1. Make sure you've installed both Node.js and Git
+1. Make sure you've installed Node.js, Git, and Gemini CLI
 2. Try closing and reopening your terminal
 3. Ask your instructor for assistance
 
