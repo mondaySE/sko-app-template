@@ -96,9 +96,33 @@ settings-config.json           # Configuration schema for settings modal
 
 - **`settings-config.json`**: Defines the fields shown in the settings modal. Add new configuration fields here.
 - **`src/stores/system-store.ts`**: Zustand store with `persist` middleware. Config is auto-saved to localStorage.
-- **`src/stores/boards-store.ts`**: Zustand store for fetched monday.com boards data.
+- **`src/stores/boards-store.ts`**: Zustand store for fetched monday.com boards data and typed/parsed data.
 - **`src/hooks/useBoardsLoader.ts`**: Hook that fetches boards on app load using monday-sdk-js.
 - **`src/index.css`**: Contains Tailwind CSS theme variables (colors, radius, etc.)
+
+### Accessing Board Data (Important!)
+
+The `boards-store` contains typed/parsed data for each board. Always access data using **selectors** to get stable references:
+
+```typescript
+// ✅ CORRECT: Use selectors to access typed data
+const restaurants = useBoardsStore(state => state.restaurants);
+const reservations = useBoardsStore(state => state.reservations);
+const tables = useBoardsStore(state => state.tables);
+const customers = useBoardsStore(state => state.customers);
+
+// ✅ CORRECT: Access multiple values with individual selectors
+const loading = useBoardsStore(state => state.loading);
+const error = useBoardsStore(state => state.error);
+```
+
+**Available typed data arrays:**
+- `restaurants: Restaurant[]` - Parsed restaurant data
+- `reservations: Reservation[]` - Parsed reservation data
+- `tables: Table[]` - Parsed table data
+- `customers: Customer[]` - Parsed customer data
+
+Each typed interface is defined in `src/types/monday-boards.ts`.
 
 ---
 
@@ -204,6 +228,7 @@ Rolled back to checkpoint "Add new component" (a1b2c3d).
 
 ## Notes
 - **Never commit without the user explicitly asking.** Always wait for user confirmation before running any git commit.
+- **Do not start or attempt to start the dev server.** The dev server is started externally by the user and is already running.
 - These commands are **local only** and will not push changes to any remote repository.  
 - Use `reset` carefully: all uncommitted changes will be permanently lost.  
 - Use `rollback` carefully: it removes the most recent commit, along with its changes.  

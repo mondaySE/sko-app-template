@@ -51,19 +51,24 @@ export interface BoardsData {
 }
 
 interface BoardsStore {
+  // Raw board data from monday.com API
   boards: BoardsData;
+  
+  // Cached typed/parsed data (stable references to prevent re-renders)
+  restaurants: Restaurant[];
+  reservations: Reservation[];
+  tables: Table[];
+  customers: Customer[];
+  
+  // Loading and error state
   loading: boolean;
   error: string | null;
+  
+  // Actions
   setBoard: (key: keyof BoardsData, board: Board | null) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
   resetBoards: () => void;
-  
-  // Typed accessors - parse raw items into typed objects
-  getRestaurants: () => Restaurant[];
-  getReservations: () => Reservation[];
-  getTables: () => Table[];
-  getCustomers: () => Customer[];
 }
 
 const defaultBoards: BoardsData = {
@@ -73,37 +78,55 @@ const defaultBoards: BoardsData = {
   customers: null,
 };
 
-export const useBoardsStore = create<BoardsStore>((set, get) => ({
+export const useBoardsStore = create<BoardsStore>((set) => ({
   boards: defaultBoards,
+  
+  // Initialize typed data as empty arrays (stable references)
+  restaurants: [],
+  reservations: [],
+  tables: [],
+  customers: [],
+  
   loading: false,
   error: null,
+  
   setBoard: (key, board) =>
-    set((state) => ({
-      boards: { ...state.boards, [key]: board },
-    })),
+    set((state) => {
+      // Update raw board data
+      const newBoards = { ...state.boards, [key]: board };
+      
+      // Parse and cache typed data based on which board was updated
+      const updates: Partial<BoardsStore> = { boards: newBoards };
+      
+      if (key === 'restaurants') {
+        updates.restaurants = board 
+          ? parseRestaurants(board.items_page.items as RawBoardItem[])
+          : [];
+      } else if (key === 'reservations') {
+        updates.reservations = board
+          ? parseReservations(board.items_page.items as RawBoardItem[])
+          : [];
+      } else if (key === 'tables') {
+        updates.tables = board
+          ? parseTables(board.items_page.items as RawBoardItem[])
+          : [];
+      } else if (key === 'customers') {
+        updates.customers = board
+          ? parseCustomers(board.items_page.items as RawBoardItem[])
+          : [];
+      }
+      
+      return updates;
+    }),
+    
   setLoading: (loading) => set({ loading }),
   setError: (error) => set({ error }),
-  resetBoards: () => set({ boards: defaultBoards, error: null }),
-  
-  // Typed accessors - these parse raw monday.com data into typed objects
-  getRestaurants: () => {
-    const board = get().boards.restaurants;
-    if (!board) return [];
-    return parseRestaurants(board.items_page.items as RawBoardItem[]);
-  },
-  getReservations: () => {
-    const board = get().boards.reservations;
-    if (!board) return [];
-    return parseReservations(board.items_page.items as RawBoardItem[]);
-  },
-  getTables: () => {
-    const board = get().boards.tables;
-    if (!board) return [];
-    return parseTables(board.items_page.items as RawBoardItem[]);
-  },
-  getCustomers: () => {
-    const board = get().boards.customers;
-    if (!board) return [];
-    return parseCustomers(board.items_page.items as RawBoardItem[]);
-  },
+  resetBoards: () => set({ 
+    boards: defaultBoards, 
+    restaurants: [],
+    reservations: [],
+    tables: [],
+    customers: [],
+    error: null 
+  }),
 }));

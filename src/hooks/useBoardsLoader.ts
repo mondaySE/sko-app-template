@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import mondaySdk from 'monday-sdk-js';
-import { toast } from 'sonner';
 import { useSystemStore } from '@/stores/system-store';
 import { useBoardsStore, type Board, type BoardsData } from '@/stores/boards-store';
 import settingsConfig from '../../settings-config.json';
@@ -136,10 +135,10 @@ export function useBoardsLoader() {
       // Log typed data after fetching is complete
       const store = useBoardsStore.getState();
       console.log('=== Typed Board Data ===');
-      console.log('Restaurants:', store.getRestaurants());
-      console.log('Reservations:', store.getReservations());
-      console.log('Tables:', store.getTables());
-      console.log('Customers:', store.getCustomers());
+      console.log('Restaurants:', store.restaurants);
+      console.log('Reservations:', store.reservations);
+      console.log('Tables:', store.tables);
+      console.log('Customers:', store.customers);
     }
 
     loadBoards();
