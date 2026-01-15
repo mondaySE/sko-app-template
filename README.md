@@ -102,10 +102,10 @@ You should see a message with a local URL (usually `http://localhost:5175`). Ope
 
 ### 4. Set up monday.com workspace
 
-1. Go to your monday.com account: **https://mdc-demo.monday.com/**
-2. Install the workspace template from: **https://mdc-demo.monday.com/marketplace/v2/app/listing/10784068/sko-booker**
-3. Follow the prompts to install the template in your workspace
-4. Take your time to explore the boards in the workspace and understand how they work
+1. Go to your any monday.com account *MAKE SURE YOU HAVE ADMIN PERMISSIONS*: 
+2. Install the SKOBar app using this link: **https://auth.monday.com/oauth2/authorize?client_id=d150460241dceb37a64999ac383fe762&response_type=install**
+3. Go to Admin -> Apps -> SKOBar -> Click on app -> Click "Use app" -> Select workspace
+4. Open your selected workspace, the SKOBar app and the boards will be there. Take your time to explore the boards in the workspace and understand how they work
 5. Open the SKOBooker app in your workspace, it should look like this
 ![monday.com workspace setup](docs/workspace-setup.png)
 6. Configure the board ids of each board respectively
@@ -157,6 +157,31 @@ If your app isn't loading or showing a blank screen, you can check for errors us
 ![monday.com ready screen](docs/error.png)
 
 **Pro tip:** If there are multiple errors, you can right-click in the Console and select **"Save as..."** to download the entire console log as a text file.
+
+---
+
+### EACCES permission denied error?
+
+If you see an error like `EACCES: permission denied` when running `npm install -g`, it means npm doesn't have permission to write to the global packages folder.
+
+**Quick fix (recommended):**
+
+Run the install command with `sudo` (you'll be prompted for your password):
+```bash
+sudo npm install -g @google/gemini-cli
+```
+
+**Permanent fix (Mac/Linux):**
+
+Change ownership of npm's directories so you won't need `sudo` for future global installs:
+```bash
+sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+```
+
+Then try installing again without `sudo`:
+```bash
+npm install -g @google/gemini-cli
+```
 
 ---
 
