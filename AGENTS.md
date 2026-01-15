@@ -15,7 +15,6 @@ This is a **React** application and a **monday.com app** built on top of monday'
 | **React 19** | UI framework (with TypeScript) |
 | **Vite** | Build tool and dev server |
 | **Tailwind CSS v4** | Utility-first CSS framework |
-| **shadcn/ui** | Pre-built UI components |
 | **React Router** | Client-side routing (HashRouter for iframe compatibility) |
 | **Framer Motion** | Animations and transitions |
 | **Zustand** | State management (with localStorage persistence) |
@@ -24,13 +23,6 @@ This is a **React** application and a **monday.com app** built on top of monday'
 | **Sonner** | Toast notifications |
 
 ### UI Guidelines
-
-- **All UI components** should be from **shadcn/ui**
-- Add new components with: `npx shadcn@latest add <component>`
-- **TLS Certificate Issues**: If installation fails due to self-signed certificate errors, use:
-  ```bash
-  NODE_TLS_REJECT_UNAUTHORIZED=0 npx shadcn@latest add <component>
-  ```
 - Use Tailwind CSS for custom styling
 - Follow the existing component patterns
 
@@ -72,7 +64,7 @@ Act like a **senior engineer** and follow these principles:
 ```
 src/
 ├── components/
-│   ├── ui/                    # shadcn/ui components (auto-generated)
+│   ├── ui/
 │   │   ├── button.tsx
 │   │   ├── dialog.tsx
 │   │   ├── input.tsx
@@ -98,7 +90,6 @@ src/
 └── main.tsx                   # Application entry point
 
 settings-config.json           # Configuration schema for settings modal
-components.json                # shadcn/ui configuration
 ```
 
 ### Key Files
