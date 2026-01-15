@@ -70,18 +70,10 @@ git clone https://github.com/mondaySE/sko-app-template.git
 ```bash
 cd sko-app-template
 ```
-5. Start Gemini CLI:
+5. Start Gemini CLI with the Gemini 2.5 Pro model:
 ```bash
-gemini
+gemini --model gemini-2.5-pro
 ```
-
-**Changing the model to Gemini 2.5 Pro:**
-
-To use the more powerful Gemini 2.5 Pro model:
-1. Run Gemini CLI by typing `gemini` in your terminal
-2. Type `/model` to see available models
-3. Select `gemini-2.5-pro` from the list
-    - Or run `gemini --model gemini-2.5-pro` when starting the CLI
 
 From this point on, you can ask Gemini CLI to help you with the remaining steps!
 
@@ -113,6 +105,16 @@ You should see a message with a local URL (usually `http://localhost:5175`). Ope
 7. Click "Save", page should reload and fetch the boards. After loading is done you should see this screen:
 ![monday.com ready screen](docs/ready.png)
 8. Congratulations! You're ready to start vibe coding!
+
+---
+
+## Building Your App
+
+This project uses **Material UI (MUI)** as the design system. When creating new components, use MUI components for a consistent, professional look.
+
+**Helpful resources:**
+- MUI Documentation: **https://mui.com/material-ui/**
+- MUI Component Gallery: **https://mui.com/material-ui/all-components/**
 
 ---
 

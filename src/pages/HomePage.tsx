@@ -1,4 +1,4 @@
-import { Rocket } from 'lucide-react'
+import { RocketLaunch } from '@mui/icons-material'
 import { motion } from 'framer-motion'
 import { MondayLogo } from '@/components/MondayLogo'
 
@@ -50,7 +50,7 @@ export function HomePage() {
             animate={{ rotate: [0, 15, -15, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <Rocket className="w-6 h-6 text-[#FFCB00]" />
+            <RocketLaunch sx={{ width: 24, height: 24, color: '#FFCB00' }} />
           </motion.div>
           <span className="text-lg font-semibold text-white">You are now ready to start vibe coding</span>
         </motion.div>

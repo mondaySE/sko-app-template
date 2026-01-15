@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Settings } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Fab } from '@mui/material';
+import { Settings } from '@mui/icons-material';
 import { SettingsModal } from './SettingsModal';
 
 export function FloatingSettingsButton() {
@@ -8,14 +8,19 @@ export function FloatingSettingsButton() {
 
   return (
     <>
-      <Button
-        variant="outline"
-        size="icon"
-        className="fixed bottom-6 left-6 h-12 w-12 rounded-full shadow-lg hover:shadow-xl transition-shadow z-50"
+      <Fab
+        color="primary"
+        aria-label="settings"
         onClick={() => setOpen(true)}
+        sx={{
+          position: 'fixed',
+          bottom: 24,
+          left: 24,
+          zIndex: 50,
+        }}
       >
-        <Settings className="h-5 w-5" />
-      </Button>
+        <Settings />
+      </Fab>
       <SettingsModal open={open} onOpenChange={setOpen} />
     </>
   );

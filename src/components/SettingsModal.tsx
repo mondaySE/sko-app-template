@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useSystemStore, type SystemConfig } from '@/stores/system-store';
-import settingsConfig from '../../settings-config.json';
 import {
   Dialog,
-  DialogContent,
-  DialogHeader,
   DialogTitle,
-  DialogFooter,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+  DialogContent,
+  DialogActions,
+  Button,
+  TextField,
+  Typography,
+  Box,
+} from '@mui/material';
+import { useSystemStore, type SystemConfig } from '@/stores/system-store';
+import settingsConfig from '../../settings-config.json';
 
 interface SettingField {
   type: string;
@@ -43,6 +43,10 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
     onOpenChange(false);
   };
 
+  const handleClose = () => {
+    onOpenChange(false);
+  };
+
   const apiFields = (settingsConfig.settings as SettingField[]).filter(
     (f) => f.section === 'API'
   );
@@ -51,61 +55,73 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   );
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[480px]">
-        <DialogHeader>
-          <DialogTitle>Settings</DialogTitle>
-        </DialogHeader>
-
-        <div className="space-y-6 py-4">
+    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+      <DialogTitle>Settings</DialogTitle>
+      <DialogContent>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, pt: 1 }}>
           {apiFields.length > 0 && (
-            <div className="space-y-4">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+            <Box>
+              <Typography
+                variant="overline"
+                color="text.secondary"
+                sx={{ fontWeight: 600, letterSpacing: 1 }}
+              >
                 API Configuration
-              </h3>
-              {apiFields.map((field) => (
-                <div key={field.name} className="space-y-2">
-                  <Label htmlFor={field.name}>{field.label}</Label>
-                  <Input
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+                {apiFields.map((field) => (
+                  <TextField
+                    key={field.name}
                     type={field.type}
                     id={field.name}
+                    label={field.label}
                     value={formData[field.name] || ''}
                     onChange={(e) => handleChange(field.name, e.target.value)}
                     placeholder={`Enter ${field.label.toLowerCase()}`}
+                    fullWidth
+                    size="small"
                   />
-                </div>
-              ))}
-            </div>
+                ))}
+              </Box>
+            </Box>
           )}
 
           {boardFields.length > 0 && (
-            <div className="space-y-4">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+            <Box>
+              <Typography
+                variant="overline"
+                color="text.secondary"
+                sx={{ fontWeight: 600, letterSpacing: 1 }}
+              >
                 Board Configuration
-              </h3>
-              {boardFields.map((field) => (
-                <div key={field.name} className="space-y-2">
-                  <Label htmlFor={field.name}>{field.label}</Label>
-                  <Input
+              </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 1 }}>
+                {boardFields.map((field) => (
+                  <TextField
+                    key={field.name}
                     type={field.type}
                     id={field.name}
+                    label={field.label}
                     value={formData[field.name] || ''}
                     onChange={(e) => handleChange(field.name, e.target.value)}
                     placeholder={`Enter ${field.label.toLowerCase()}`}
+                    fullWidth
+                    size="small"
                   />
-                </div>
-              ))}
-            </div>
+                ))}
+              </Box>
+            </Box>
           )}
-        </div>
-
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
-          </Button>
-          <Button onClick={handleSave}>Save</Button>
-        </DialogFooter>
+        </Box>
       </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="inherit">
+          Cancel
+        </Button>
+        <Button onClick={handleSave} variant="contained">
+          Save
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 }

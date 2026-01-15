@@ -14,16 +14,21 @@ This is a **React** application and a **monday.com app** built on top of monday'
 |------------|---------|
 | **React 19** | UI framework (with TypeScript) |
 | **Vite** | Build tool and dev server |
+| **Material UI (MUI)** | Component library for UI design |
 | **Tailwind CSS v4** | Utility-first CSS framework |
 | **React Router** | Client-side routing (HashRouter for iframe compatibility) |
 | **Framer Motion** | Animations and transitions |
 | **Zustand** | State management (with localStorage persistence) |
-| **Lucide React** | Icon library |
 | **monday-sdk-js** | monday.com API integration |
 | **Sonner** | Toast notifications |
 
 ### UI Guidelines
-- Use Tailwind CSS for custom styling
+
+- **Use Material UI (MUI) for all new components** - Every new component should be built using MUI components
+- Add new MUI components with: `import { ComponentName } from '@mui/material'`
+- Use MUI icons with: `import { IconName } from '@mui/icons-material'`
+- Refer to the MUI documentation: **https://mui.com/material-ui/**
+- Use Tailwind CSS for custom styling when needed
 - Follow the existing component patterns
 
 ### Animations
@@ -64,13 +69,8 @@ Act like a **senior engineer** and follow these principles:
 ```
 src/
 ├── components/
-│   ├── ui/
-│   │   ├── button.tsx
-│   │   ├── dialog.tsx
-│   │   ├── input.tsx
-│   │   └── label.tsx
-│   ├── FloatingSettingsButton.tsx  # Settings FAB button
-│   ├── SettingsModal.tsx           # Settings configuration modal
+│   ├── FloatingSettingsButton.tsx  # Settings FAB button (MUI Fab)
+│   ├── SettingsModal.tsx           # Settings configuration modal (MUI Dialog)
 │   ├── LoadingScreen.tsx           # Loading state component
 │   ├── ErrorScreen.tsx             # Error state component
 │   └── MondayLogo.tsx              # monday.com logo SVG
