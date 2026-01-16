@@ -6,7 +6,7 @@ Welcome! This guide will help you set up everything you need for the workshop. D
 
 ## Prerequisites
 
-Before starting, you'll need to install three tools on your computer: **Node.js**, **Git**, and **Gemini CLI**.
+Before starting, you'll need to install three tools on your computer: **Node.js**, **Git**, and **Cursor**.
 
 ### 1. Install Node.js
 
@@ -40,18 +40,14 @@ Git is a tool that helps track changes to your code and collaborate with others.
 
 ---
 
-### 3. Install Gemini CLI
+### 3. Install Cursor
 
-Gemini CLI is an AI-powered terminal tool that we'll use during the workshop to build, debug, and deploy code.
+Cursor is an AI-powered code editor that we'll use during the workshop to build, debug, and deploy code.
 
-1. Go to: **https://geminicli.com/**
-2. Open your terminal and run:
-```bash
-npm install -g @google/gemini-cli
-```
-3. After installation, run `gemini` in your terminal to start the setup
-4. Follow the prompts to authenticate with your Google account
-5. Congratulations! You are all set with gemini!
+1. Go to: **https://cursor.com/**
+2. Download and install Cursor for your operating system
+3. Open Cursor and sign in with your personal account (**not @monday as it redirects to the Okta Cursor which you don't have**)
+4. Congratulations! You are all set with Cursor!
 ---
 
 ## Getting Started
@@ -70,12 +66,12 @@ git clone https://github.com/mondaySE/sko-app-template.git
 ```bash
 cd sko-app-template
 ```
-5. Start Gemini CLI with the Gemini 2.5 Pro model:
+5. Open the project in Cursor:
 ```bash
-gemini --model gemini-2.5-pro
+cursor .
 ```
 
-From this point on, you can ask Gemini CLI to help you with the remaining steps!
+From this point on, you can ask Cursor to help you with the remaining steps!
 
 ### 2. Install dependencies
 
@@ -120,7 +116,7 @@ This project uses **Material UI (MUI)** as the design system. When creating new 
 
 ## Cheat Sheet: Useful Commands
 
-During the workshop, you can use these simple commands by typing them in Gemini CLI:
+During the workshop, you can use these simple commands by typing them in Cursor's Agent chat:
 
 | Command | What it does |
 |---------|--------------|
@@ -154,7 +150,7 @@ If your app isn't loading or showing a blank screen, you can check for errors us
 2. Click on an error message to expand it (if needed)
 3. Right-click on the error message and select **"Copy" > "Copy message"**
    - Or select the error text and press `Cmd + C` (Mac) or `Ctrl + C` (Windows)
-4. Paste the copied error into Gemini CLI for help
+4. Paste the copied error into Cursor's Agent chat for help
 
 ![monday.com ready screen](docs/error.png)
 
@@ -162,36 +158,13 @@ If your app isn't loading or showing a blank screen, you can check for errors us
 
 ---
 
-### EACCES permission denied error?
-
-If you see an error like `EACCES: permission denied` when running `npm install -g`, it means npm doesn't have permission to write to the global packages folder.
-
-**Quick fix (recommended):**
-
-Run the install command with `sudo` (you'll be prompted for your password):
-```bash
-sudo npm install -g @google/gemini-cli
-```
-
-**Permanent fix (Mac/Linux):**
-
-Change ownership of npm's directories so you won't need `sudo` for future global installs:
-```bash
-sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
-```
-
-Then try installing again without `sudo`:
-```bash
-npm install -g @google/gemini-cli
-```
-
 ---
 
 ## Need Help?
 
 If you run into any issues:
-1. Make sure you've installed Node.js, Git, and Gemini CLI
-2. Try closing and reopening your terminal
+1. Make sure you've installed Node.js, Git, and Cursor
+2. Try closing and reopening Cursor
 3. Ask your instructor for assistance
 
 ---
