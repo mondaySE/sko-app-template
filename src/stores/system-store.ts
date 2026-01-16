@@ -6,7 +6,7 @@ export interface SystemConfig {
   reservationsBoardId: string;
   tablesBoardId: string;
   customersBoardId: string;
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 interface SystemStore {

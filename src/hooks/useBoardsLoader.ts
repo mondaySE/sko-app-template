@@ -14,6 +14,12 @@ interface BoardSetting {
   description?: string;
 }
 
+// Type for monday.api() response that may include GraphQL errors
+interface MondayApiResponse<T> {
+  data?: T;
+  errors?: Array<{ message: string }>;
+}
+
 const boardKeyMap: Record<string, keyof BoardsData> = {
   restaurantsBoardId: 'restaurants',
   reservationsBoardId: 'reservations',
@@ -21,38 +27,36 @@ const boardKeyMap: Record<string, keyof BoardsData> = {
   customersBoardId: 'customers',
 };
 
-async function fetchBoard(boardId: string): Promise<Board> {
-  const query = `
-    query GetBoard($boardId: [ID!]!) {
-      boards(ids: $boardId) {
+const BOARD_QUERY = `
+  query GetBoard($boardId: [ID!]!) {
+    boards(ids: $boardId) {
+      id
+      name
+      columns {
         id
-        name
-        columns {
+        title
+        type
+      }
+      items_page(limit: 500) {
+        items {
           id
-          title
-          type
-        }
-        items_page(limit: 500) {
-          items {
+          name
+          column_values {
             id
-            name
-            column_values {
-              id
-              text
-              value
-              ... on BoardRelationValue {
-                linked_items {
+            text
+            value
+            ... on BoardRelationValue {
+              linked_items {
+                id
+                name
+              }
+            }
+            ... on MirrorValue {
+              display_value
+              mirrored_items {
+                linked_item {
                   id
                   name
-                }
-              }
-              ... on MirrorValue {
-                display_value
-                mirrored_items {
-                  linked_item {
-                    id
-                    name
-                  }
                 }
               }
             }
@@ -60,11 +64,23 @@ async function fetchBoard(boardId: string): Promise<Board> {
         }
       }
     }
-  `;
+  }
+`;
 
-  const response = await monday.api(query, {
+async function fetchBoard(boardId: string, signal?: AbortSignal): Promise<Board> {
+  // Check if already aborted before starting
+  if (signal?.aborted) {
+    throw new Error('Request aborted');
+  }
+
+  const response = await monday.api(BOARD_QUERY, {
     variables: { boardId: [boardId] },
-  });
+  }) as MondayApiResponse<{ boards: Board[] }>;
+
+  // Check if aborted after the request completes
+  if (signal?.aborted) {
+    throw new Error('Request aborted');
+  }
 
   if (response.errors) {
     throw new Error(response.errors[0]?.message || 'Failed to fetch board');
@@ -100,37 +116,57 @@ export function useBoardsLoader() {
     
     if (!hasAnyBoardId) return;
 
-    prevConfigRef.current = configFingerprint;
+    // Create AbortController to cancel pending requests if config changes
+    const abortController = new AbortController();
 
     async function loadBoards() {
       setLoading(true);
       setError(null);
+
+      // Build list of boards to fetch (only those with IDs configured)
+      const boardsToFetch = boardSettings
+        .filter((setting) => config[setting.name])
+        .map((setting) => ({
+          setting,
+          boardId: config[setting.name]!,
+          boardKey: boardKeyMap[setting.name],
+          description: setting.description || setting.label,
+        }));
+
+      // Fetch all boards in parallel for better performance
+      const results = await Promise.allSettled(
+        boardsToFetch.map(({ boardId }) => 
+          fetchBoard(boardId, abortController.signal)
+        )
+      );
+
+      // Don't update state if aborted
+      if (abortController.signal.aborted) return;
+
+      // Process results and update store
       const failedBoards: string[] = [];
-
-      for (const setting of boardSettings) {
-        const boardId = config[setting.name];
-        const boardKey = boardKeyMap[setting.name];
-        const description = setting.description || setting.label;
-
-        if (!boardId) {
-          continue;
-        }
-
-        try {
-          const board = await fetchBoard(boardId);
-          setBoard(boardKey, board);
-        } catch (error) {
-          console.error(`Failed to fetch ${description}:`, error);
+      
+      results.forEach((result, index) => {
+        const { boardKey, description } = boardsToFetch[index];
+        
+        if (result.status === 'fulfilled') {
+          setBoard(boardKey, result.value);
+        } else {
+          console.error(`Failed to fetch ${description}:`, result.reason);
           setBoard(boardKey, null);
           failedBoards.push(description);
         }
-      }
+      });
 
       if (failedBoards.length > 0) {
         setError(`Failed to load: ${failedBoards.join(', ')}`);
       }
 
       setLoading(false);
+      
+      // Only update fingerprint AFTER successful completion
+      // This ensures aborted requests don't prevent retries in StrictMode
+      prevConfigRef.current = configFingerprint;
       
       // Log typed data after fetching is complete
       const store = useBoardsStore.getState();
@@ -142,5 +178,10 @@ export function useBoardsLoader() {
     }
 
     loadBoards();
+
+    // Cleanup: abort pending requests when config changes or component unmounts
+    return () => {
+      abortController.abort();
+    };
   }, [config, setBoard, setLoading, setError]);
 }

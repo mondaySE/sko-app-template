@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -24,27 +24,21 @@ interface SettingsModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
-  const { config, setConfig } = useSystemStore();
-  const [formData, setFormData] = useState<SystemConfig>({ ...config });
+interface SettingsFormProps {
+  config: SystemConfig;
+  onSave: (data: SystemConfig) => void;
+  onClose: () => void;
+}
 
-  useEffect(() => {
-    if (open) {
-      setFormData({ ...config });
-    }
-  }, [open, config]);
+function SettingsForm({ config, onSave, onClose }: SettingsFormProps) {
+  const [formData, setFormData] = useState<SystemConfig>(() => ({ ...config }));
 
   const handleChange = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSave = () => {
-    setConfig(formData);
-    onOpenChange(false);
-  };
-
-  const handleClose = () => {
-    onOpenChange(false);
+    onSave(formData);
   };
 
   const apiFields = (settingsConfig.settings as SettingField[]).filter(
@@ -55,7 +49,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   );
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+    <>
       <DialogTitle>Settings</DialogTitle>
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, pt: 1 }}>
@@ -75,7 +69,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                     type={field.type}
                     id={field.name}
                     label={field.label}
-                    value={formData[field.name] || ''}
+                    value={formData[field.name] ?? ''}
                     onChange={(e) => handleChange(field.name, e.target.value)}
                     placeholder={`Enter ${field.label.toLowerCase()}`}
                     fullWidth
@@ -102,7 +96,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                     type={field.type}
                     id={field.name}
                     label={field.label}
-                    value={formData[field.name] || ''}
+                    value={formData[field.name] ?? ''}
                     onChange={(e) => handleChange(field.name, e.target.value)}
                     placeholder={`Enter ${field.label.toLowerCase()}`}
                     fullWidth
@@ -115,13 +109,39 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="inherit">
+        <Button onClick={onClose} color="inherit">
           Cancel
         </Button>
         <Button onClick={handleSave} variant="contained">
           Save
         </Button>
       </DialogActions>
+    </>
+  );
+}
+
+export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
+  const { config, setConfig } = useSystemStore();
+
+  const handleSave = (formData: SystemConfig) => {
+    setConfig(formData);
+    onOpenChange(false);
+  };
+
+  const handleClose = () => {
+    onOpenChange(false);
+  };
+
+  // SettingsForm only renders when open=true, so it remounts with fresh state each time the dialog opens
+  return (
+    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+      {open && (
+        <SettingsForm
+          config={config}
+          onSave={handleSave}
+          onClose={handleClose}
+        />
+      )}
     </Dialog>
   );
 }
