@@ -88,6 +88,12 @@ Act like a **senior engineer** and follow these principles:
 - **DRY (Don't Repeat Yourself)**: Extract reusable logic into hooks or utility functions
 - **Keep files small**: If a file grows too large, refactor and extract components/hooks
 
+### Avoiding Duplicate Code
+
+- Each file should define each function, class, or export **exactly once**.
+- After making changes, always verify the build passes (`npm run build`).
+- If you see "Duplicate identifier" or "already been declared" errors, check the file for repeated code blocks and remove the duplicates.
+
 ---
 
 ## Project Structure
