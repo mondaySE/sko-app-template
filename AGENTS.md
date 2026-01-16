@@ -6,7 +6,33 @@ This file defines custom agent commands for managing your Git workflow during th
 
 ## Project Overview
 
+This repository is a **workshop boilerplate** for building a monday.com app. It serves as a project starter that participants will extend by adding features using AI and prompts.
+
 This is a **React** application and a **monday.com app** built on top of monday's app framework.
+
+### How It Works
+
+The project is designed around four core entities that are stored in monday.com boards:
+- **Restaurants** - Restaurant information
+- **Tables** - Table data for each restaurant
+- **Reservations** - Booking/reservation records
+- **Customers** - Customer information
+
+Participants configure the board ID for each entity in the app settings. When the app loads, it automatically fetches data from monday.com and stores it in a Zustand store for easy access throughout the application.
+
+### Important: Using Real Data
+
+**When building features that involve restaurants, tables, reservations, or customers, ALWAYS pull the data from the Zustand store (`boards-store.ts`) instead of using mock/hardcoded data.**
+
+Example:
+```typescript
+// ✅ CORRECT: Pull from Zustand store
+const restaurants = useBoardsStore(state => state.restaurants);
+const tables = useBoardsStore(state => state.tables);
+
+// ❌ WRONG: Don't use mock data
+const restaurants = [{ id: 1, name: "Mock Restaurant" }];
+```
 
 ### Tech Stack
 
