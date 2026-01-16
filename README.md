@@ -133,6 +133,37 @@ During the workshop, you can use these simple commands by typing them in Cursor'
 
 ---
 
+## Before You're Done: Quality Checks
+
+Before announcing that your task is complete, always run these checks to make sure everything works:
+
+### 1. Check for lint errors
+
+Run the linter to catch any code style issues or potential bugs:
+
+```bash
+npm run lint
+```
+
+If there are errors, fix them before proceeding. You can ask Cursor to help you fix any lint errors.
+
+### 2. Check that the app builds
+
+Make sure your app compiles without errors:
+
+```bash
+npm run build
+```
+
+If the build fails, check the error messages and fix any issues. Common problems include:
+- Missing imports
+- TypeScript type errors
+- Syntax errors
+
+**Pro tip:** Only consider your task complete when both commands run without errors!
+
+---
+
 ## Troubleshooting
 
 ### App won't render?
