@@ -261,6 +261,7 @@ Rolled back to checkpoint "Add new component" (a1b2c3d).
 ## Notes
 - **Never commit without the user explicitly asking.** Always wait for user confirmation before running any git commit.
 - **Do not start or attempt to start the dev server.** The dev server is started externally by the user and is already running.
+- **Do not use browser navigation as a testing method.** The user will inspect the browser themselves, and you should not offer to navigate to any URL.
 - These commands are **local only** and will not push changes to any remote repository.  
 - Use `reset` carefully: all uncommitted changes will be permanently lost.  
 - Use `rollback` carefully: it removes the most recent commit, along with its changes.
