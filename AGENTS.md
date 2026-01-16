@@ -257,7 +257,36 @@ Rolled back to checkpoint "Add new component" (a1b2c3d).
 - **Do not start or attempt to start the dev server.** The dev server is started externally by the user and is already running.
 - These commands are **local only** and will not push changes to any remote repository.  
 - Use `reset` carefully: all uncommitted changes will be permanently lost.  
-- Use `rollback` carefully: it removes the most recent commit, along with its changes.  
+- Use `rollback` carefully: it removes the most recent commit, along with its changes.
+
+## Before Announcing Task Completion
+
+Before telling the user that a task is complete, always run these checks:
+
+### 1. Check for lint errors
+
+Run the linter to catch any code style issues or potential bugs:
+
+```bash
+npm run lint
+```
+
+If there are errors, fix them before announcing completion.
+
+### 2. Check that the app builds
+
+Make sure the app compiles without errors:
+
+```bash
+npm run build
+```
+
+If the build fails, fix the issues before announcing completion. Common problems include:
+- Missing imports
+- TypeScript type errors
+- Syntax errors
+
+**Only announce the task as complete when both commands run without errors.**  
 
 ---
 
