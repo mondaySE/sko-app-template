@@ -169,4 +169,15 @@ If you run into any issues:
 
 ---
 
+## Submit Your App
+
+Ready to show off what you've built? Submit your app for review!
+
+1. Go to the submission form: **https://forms.monday.com/forms/55ef0b005447680949ffb27cfa67fa4b?r=use1**
+2. Fill in the **names of all participants** in your team
+3. Include a **short video demo** of your app in action
+4. Submit and celebrate! 🎉
+
+---
+
 Happy coding! 🚀
