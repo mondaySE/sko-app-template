@@ -54,22 +54,42 @@ Cursor is an AI-powered code editor that we'll use during the workshop to build,
 
 Once you have all prerequisites installed, follow these steps:
 
-### 1. Clone the repository
+### 1. Download the project
+
+Choose the option that works best for you:
+
+#### Option A: If you don't feel comfortable with the terminal
+
+1. Go to the GitHub repository: **https://github.com/mondaySE/sko-app-template**
+2. Click the green **"Code"** button near the top right
+3. Select **"Download ZIP"** from the dropdown menu
+4. Once downloaded, extract/unzip the folder to where you want to save the project (e.g., Documents)
+5. Open Cursor
+6. Go to **File → Open Folder** and select the extracted `sko-app-template` folder
+
+#### Option B: If you are comfortable with the terminal
 
 1. Open your terminal
 2. Navigate to where you want to save the project (e.g., `cd ~/Documents`)
 3. Run the following command:
+
 ```bash
 git clone https://github.com/mondaySE/sko-app-template.git
 ```
+
 4. Enter the project folder:
+
 ```bash
 cd sko-app-template
 ```
+
 5. Open the project in Cursor:
+
 ```bash
 cursor .
 ```
+
+---
 
 From this point on, you can ask Cursor to help you with the remaining steps!
 
