@@ -212,4 +212,25 @@ Ready to show off what you've built? Submit your app for review!
 
 ---
 
+## Resources and Links
+
+### React UI Libraries
+
+| Library | Description | Link |
+|---------|-------------|------|
+| **Material UI (MUI)** | Google's Material Design components for React | **https://mui.com/** |
+| **Chakra UI** | Simple, modular and accessible components | **https://chakra-ui.com/** |
+| **Ant Design** | Enterprise-level UI design language | **https://ant.design/** |
+| **Shadcn/ui** | Beautifully designed components built with Radix UI and Tailwind | **https://ui.shadcn.com/** |
+| **Mantine** | Full-featured React components library | **https://mantine.dev/** |
+
+### Animation Libraries
+
+| Library | Description | Link |
+|---------|-------------|------|
+| **Framer Motion** | Production-ready motion library for React | **https://motion.dev/** |
+| **Aceternity UI** | Copy-paste animated components for modern websites | **https://ui.aceternity.com/** |
+
+---
+
 Happy coding! 🚀
