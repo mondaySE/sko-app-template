@@ -298,6 +298,24 @@ If the build fails, fix the issues before announcing completion. Common problems
 
 ---
 
+## Troubleshooting
+
+### Self-signed certificate errors during npm/npx install
+
+If `npm install` or `npx` commands fail with a self-signed certificate error, use the following environment variable:
+
+```bash
+NODE_TLS_REJECT_UNAUTHORIZED=0 npm install
+```
+
+Or for npx:
+
+```bash
+NODE_TLS_REJECT_UNAUTHORIZED=0 npx <command>
+```
+
+---
+
 ## Recommended Workflow
 1. Use `save` frequently to create checkpoints.  
 2. Use `reset` if you want to discard recent experimental changes.  
