@@ -57,7 +57,7 @@ The referral link will navigate you to Cursor's website to download and sign up.
 #### Install and set up Cursor
 
 1. Download and install Cursor for your operating system
-2. Open Cursor and create your account with your **personal email**
+2. Open Cursor and log in with your personal referral code
 3. Apply your referral code during sign-up or in Settings
 4. Congratulations! You are all set with Cursor!
 ---
