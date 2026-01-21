@@ -44,9 +44,21 @@ Git is a tool that helps track changes to your code and collaborate with others.
 
 Cursor is an AI-powered code editor that we'll use during the workshop to build, debug, and deploy code.
 
-1. Go to: **https://cursor.com/**
-2. Download and install Cursor for your operating system
-3. Open Cursor and sign in with your personal account (**not @monday as it redirects to the Okta Cursor which you don't have**)
+⚠️ **IMPORTANT: Do NOT use your @monday.com email!** It will redirect you to Okta authentication which you don't have access to. **Create your account with your personal email!!!**
+
+#### Obtain your $50 referral code
+
+**First, assign yourself as the person in the Person column before claiming the code!**
+
+Go to the referral codes board: **https://monday.monday.com/boards/18396394637**
+
+The referral link will navigate you to Cursor's website to download and sign up.
+
+#### Install and set up Cursor
+
+1. Download and install Cursor for your operating system
+2. Open Cursor and create your account with your **personal email**
+3. Apply your referral code during sign-up or in Settings
 4. Congratulations! You are all set with Cursor!
 ---
 
